@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import json
 import os
+from uuid import uuid4
 import logging
 import secrets
 from datetime import date
@@ -118,7 +119,13 @@ def validate_order(order):
 
 @app.route("/order", methods=["POST"])
 def order():
+    order_id = str(uuid4())
+    if session.get("last_order_id") == order_id:
+        flash("Hai già inviato questo ordine.", "warning")
+        return redirect(url_for("index"))
+    session["last_order_id"] = order_id
     logging.debug("Gestione ordine ricevuto.")
+    logging.debug("Dati ricevuti dal modulo: %s", request.form)
     try:
         menu = load_menu()
         total_dishes = sum(len(menu.get(category, [])) for category in ["primi", "secondi", "dolci"])
@@ -131,15 +138,18 @@ def order():
 
         dishes = []
         index = 0
+        quantities = []
+        notes = []
         for category in ["primi", "secondi", "dolci"]:
-            for dish in menu.get(category, []):
-                if quantities[index] > 0:
-                    dishes.append({
+            for index, dish in enumerate(menu.get(category, [])):
+                quantity = int(request.form.get(f"quantities_{category}_{index}", 0))
+                note = request.form.get(f"notes_{category}_{index}", "")
+                if quantity > 0:
+                    quantities.append({
                         "name": dish["name"],
-                        "quantity": quantities[index],
-                        "note": notes[index]
+                        "quantity": quantity,
+                        "note": note
                     })
-                index += 1
 
         extras = [
             {"name": "Acqua Naturale", "quantity": int(request.form.get("quantity_water_natural", 0) or 0)},

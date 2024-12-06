@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meating - Ordina il tuo pranzo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
     <div class="container py-5">
         <div class="card shadow-sm mx-auto" style="max-width: 700px; border-radius: 10px;">
@@ -24,33 +26,37 @@
                     <!-- Nome -->
                     <div class="mb-3">
                         <label for="firstname" class="form-label">Nome</label>
-                        <input type="text" id="firstname" name="firstname" class="form-control" value="{{ firstname }}" required>
+                        <input type="text" id="firstname" name="firstname" class="form-control" value="{{ firstname }}"
+                            required>
                     </div>
 
                     <!-- Cognome -->
                     <div class="mb-3">
                         <label for="lastname" class="form-label">Cognome</label>
-                        <input type="text" id="lastname" name="lastname" class="form-control" value="{{ lastname }}" required>
+                        <input type="text" id="lastname" name="lastname" class="form-control" value="{{ lastname }}"
+                            required>
                     </div>
 
                     <!-- Numero di Persone -->
                     <div class="mb-3">
                         <label for="people_count" class="form-label">Numero di Persone</label>
-                        <input type="number" id="people_count" name="people_count" class="form-control" min="1" value="{{ people_count }}" required>
+                        <input type="number" id="people_count" name="people_count" class="form-control" min="1"
+                            value="{{ people_count }}" required>
                     </div>
 
                     <!-- Orario del pranzo -->
                     <div class="mb-3">
                         <label for="timeslot" class="form-label">Orario del pranzo</label>
                         <select id="timeslot" name="timeslot" class="form-select" required>
-                            <option value="" disabled {% if not timeslot %}selected{% endif %}>Seleziona un orario</option>
+                            <option value="" disabled {% if not timeslot %}selected{% endif %}>Seleziona un orario
+                            </option>
                             {% for hour in range(12, 15) %}
-                                {% for minute in [0, 30] %}
-                                    <option value="{{ '%02d:%02d'|format(hour, minute) }}" 
-                                        {% if timeslot == '%02d:%02d'|format(hour, minute) %}selected{% endif %}>
-                                        {{ '%02d:%02d'|format(hour, minute) }}
-                                    </option>
-                                {% endfor %}
+                            {% for minute in [0, 30] %}
+                            <option value="{{ '%02d:%02d'|format(hour, minute) }}" {% if timeslot=='%02d:%02d'
+                                |format(hour, minute) %}selected{% endif %}>
+                                {{ '%02d:%02d'|format(hour, minute) }}
+                            </option>
+                            {% endfor %}
                             {% endfor %}
                         </select>
                     </div>
@@ -71,17 +77,23 @@
                                     {% endif %}
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="quantity_{{ loop.index0 }}" class="form-label">Quantità</label>
-                                            <input type="number" id="quantity_{{ loop.index0 }}" name="quantities_{{ loop.index0 }}" class="form-control" value="0" min="0">
+                                            <label for="quantities_{{ category }}_{{ index }}"
+                                                class="form-label">Quantità</label>
+                                            <input type="number" id="quantities_{{ category }}_{{ index }}"
+                                                name="quantities_{{ category }}_{{ index }}" class="form-control"
+                                                value="0" min="0">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="notes_{{ loop.index0 }}" class="form-label">Note</label>
-                                            <input type="text" id="notes_{{ loop.index0 }}" name="notes_{{ loop.index0 }}" class="form-control" value="">
+                                            <label for="notes_{{ category }}_{{ index }}"
+                                                class="form-label">Note</label>
+                                            <input type="text" id="notes_{{ category }}_{{ index }}"
+                                                name="notes_{{ category }}_{{ index }}" class="form-control" value="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% set index = index + 1 %}
                         {% endfor %}
                     </div>
                     {% endfor %}
@@ -97,11 +109,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="quantity_water_natural" class="form-label">Quantità</label>
-                                            <input type="number" id="quantity_water_natural" name="quantity_water_natural" class="form-control" value="0" min="0">
+                                            <input type="number" id="quantity_water_natural"
+                                                name="quantity_water_natural" class="form-control" value="0" min="0">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="note_water_natural" class="form-label">Note</label>
-                                            <input type="text" id="note_water_natural" name="note_water_natural" class="form-control" value="">
+                                            <input type="text" id="note_water_natural" name="note_water_natural"
+                                                class="form-control" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -116,11 +130,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="quantity_water_sparkling" class="form-label">Quantità</label>
-                                            <input type="number" id="quantity_water_sparkling" name="quantity_water_sparkling" class="form-control" value="0" min="0">
+                                            <input type="number" id="quantity_water_sparkling"
+                                                name="quantity_water_sparkling" class="form-control" value="0" min="0">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="note_water_sparkling" class="form-label">Note</label>
-                                            <input type="text" id="note_water_sparkling" name="note_water_sparkling" class="form-control" value="">
+                                            <input type="text" id="note_water_sparkling" name="note_water_sparkling"
+                                                class="form-control" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -135,11 +151,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="quantity_coffee" class="form-label">Quantità</label>
-                                            <input type="number" id="quantity_coffee" name="quantity_coffee" class="form-control" value="0" min="0">
+                                            <input type="number" id="quantity_coffee" name="quantity_coffee"
+                                                class="form-control" value="0" min="0">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="note_coffee" class="form-label">Note</label>
-                                            <input type="text" id="note_coffee" name="note_coffee" class="form-control" value="">
+                                            <input type="text" id="note_coffee" name="note_coffee" class="form-control"
+                                                value="">
                                         </div>
                                     </div>
                                 </div>
@@ -157,4 +175,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
