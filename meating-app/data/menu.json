@@ -1,0 +1,27 @@
+{
+    "2024-12-06": {
+        "primi": [
+            {
+                "name": "Pasta al pomodoro",
+                "notes": "Senza lattosio"
+            }
+        ],
+        "secondi": [
+            {
+                "name": "Pollo arrosto",
+                "notes": ""
+            }
+        ],
+        "dolci": [
+            {
+                "name": "Tiramis\u00f9",
+                "notes": "Con cacao amaro"
+            }
+        ]
+    },
+    "2024-12-07": {
+        "primi": [],
+        "secondi": [],
+        "dolci": []
+    }
+}

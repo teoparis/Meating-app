@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordine Confermato</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card shadow-sm mx-auto" style="max-width: 700px; border-radius: 10px;">
+            <div class="card-body text-center">
+                <h1 class="mb-4">Ordine Confermato!</h1>
+                <p class="text-muted">Grazie per aver ordinato con <strong>Meating</strong>.</p>
+                <p>Il tuo ordine è stato ricevuto e sarà preparato al più presto.</p>
+                <hr class="my-4">
+
+                <!-- Riepilogo ordine -->
+                <h2 class="mt-4 mb-4">Riepilogo del tuo ordine</h2>
+                <div class="text-start mx-auto" style="max-width: 500px; line-height: 1.8;">
+                    <p><strong>Nome:</strong> {{ order.firstname }}</p>
+                    <p><strong>Cognome:</strong> {{ order.lastname }}</p>
+                    <p><strong>Numero di persone:</strong> {{ order.people_count }}</p>
+                    <p><strong>Orario:</strong> {{ order.timeslot }}</p>
+                </div>
+
+                <!-- Dettagli ordine -->
+                {% if order.details and order.details.dishes and order.details.dishes|length > 0 %}
+                <h4 class="mt-5 mb-3">Piatti Ordinati</h4>
+                <ul class="list-group list-group-flush text-start mx-auto" style="max-width: 500px;">
+                    {% for dish in order.details.dishes %}
+                    <li class="list-group-item">
+                        <strong>{{ dish.name }}</strong> - Quantità: {{ dish.quantity }}
+                        {% if dish.note %}
+                        <br><small class="text-muted">Note: {{ dish.note }}</small>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted">Nessun piatto ordinato.</p>
+                {% endif %}
+
+                {% if order.details and order.details.extras and order.details.extras|length > 0 %}
+                <h4 class="mt-5 mb-3">Extra Ordinati</h4>
+                <ul class="list-group list-group-flush text-start mx-auto" style="max-width: 500px;">
+                    {% for extra in order.details.extras %}
+                    <li class="list-group-item">
+                        <strong>{{ extra.name }}</strong> - Quantità: {{ extra.quantity }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted">Nessun extra ordinato.</p>
+                {% endif %}
+
+                <div class="mt-5">
+                    <a href="/" class="btn btn-primary me-2">Torna alla Home</a>
+                    <a href="/admin/orders" class="btn btn-outline-secondary">Visualizza tutti gli ordini</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

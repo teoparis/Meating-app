@@ -1,0 +1,94 @@
+[
+    {
+        "firstname": "Matteo",
+        "lastname": "Parisi",
+        "people_count": 4,
+        "timeslot": "13:30",
+        "details": {
+            "dishes": [],
+            "extras": [
+                {
+                    "name": "Acqua Naturale",
+                    "quantity": 3
+                },
+                {
+                    "name": "Acqua Frizzante",
+                    "quantity": 1
+                },
+                {
+                    "name": "Caff\u00e8",
+                    "quantity": 4
+                }
+            ]
+        }
+    },
+    {
+        "firstname": "Matteo",
+        "lastname": "Parisi",
+        "people_count": 2,
+        "timeslot": "12:00",
+        "details": {
+            "dishes": [],
+            "extras": [
+                {
+                    "name": "Acqua Naturale",
+                    "quantity": 2
+                },
+                {
+                    "name": "Acqua Frizzante",
+                    "quantity": 2
+                },
+                {
+                    "name": "Caff\u00e8",
+                    "quantity": 2
+                }
+            ]
+        }
+    },
+    {
+        "firstname": "1",
+        "lastname": "1",
+        "people_count": 1,
+        "timeslot": "12:00",
+        "details": {
+            "dishes": [],
+            "extras": [
+                {
+                    "name": "Acqua Naturale",
+                    "quantity": 11
+                },
+                {
+                    "name": "Acqua Frizzante",
+                    "quantity": 1
+                },
+                {
+                    "name": "Caff\u00e8",
+                    "quantity": 1
+                }
+            ]
+        }
+    },
+    {
+        "firstname": "1",
+        "lastname": "1",
+        "people_count": 1,
+        "timeslot": "12:00",
+        "details": {
+            "dishes": [],
+            "extras": [
+                {
+                    "name": "Acqua Naturale",
+                    "quantity": 11
+                },
+                {
+                    "name": "Acqua Frizzante",
+                    "quantity": 1
+                },
+                {
+                    "name": "Caff\u00e8",
+                    "quantity": 1
+                }
+            ]
+        }
+    }
+]

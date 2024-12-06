@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordini Ricevuti</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4 text-primary">
+            <i class="bi bi-list-check"></i> Ordini Ricevuti
+        </h1>
+        <p class="text-center text-muted">Qui trovi tutti gli ordini inviati tramite l'app.</p>
+
+        {% if orders|length == 0 %}
+        <div class="alert alert-info text-center mt-5" role="alert">
+            Al momento non ci sono ordini disponibili.
+        </div>
+        {% else %}
+
+        <!-- Totale ordini -->
+        <div class="d-flex justify-content-between mb-4">
+            <span class="text-muted">Totale ordini: {{ orders|length }}</span>
+        </div>
+
+        <!-- Elenco ordini -->
+        <div class="row">
+            {% for order in orders %}
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm {{ 'border-warning' if order.people_count > 5 else '' }}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <span class="badge bg-primary">#{{ loop.index }}</span>
+                            Ordine per {{ order.firstname }} {{ order.lastname }}
+                        </h5>
+                        <p class="card-text"><strong>Numero Persone:</strong> {{ order.people_count }}</p>
+                        <p class="card-text"><strong>Orario Scelto:</strong> {{ order.timeslot }}</p>
+
+                        {% if order.details.dishes|length > 0 or order.details.extras|length > 0 %}
+                        <hr>
+
+                        <!-- Dettagli Piatti -->
+                        {% if order.details.dishes|length > 0 %}
+                        <h6 class="card-title"><strong>Dettagli dei Piatti:</strong></h6>
+                        <ul class="list-group list-group-flush mb-3">
+                            {% for dish in order.details.dishes %}
+                            <li class="list-group-item">
+                                <strong>{{ dish.name }}</strong><br>
+                                Quantità: {{ dish.quantity }}
+                                {% if dish.note %}
+                                <br><small class="text-muted">Note: {{ dish.note }}</small>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <!-- Dettagli Extra -->
+                        {% if order.details.extras|length > 0 %}
+                        <h6 class="card-title"><strong>Dettagli Extra:</strong></h6>
+                        <ul class="list-group list-group-flush mb-3">
+                            {% for extra in order.details.extras %}
+                            <li class="list-group-item">
+                                <strong>{{ extra.name }}</strong><br>
+                                Quantità: {{ extra.quantity }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <p class="card-text"><strong>Totale Piatti:</strong>
+                            {{ order.details.dishes | sum(attribute='quantity') + order.details.extras |
+                            sum(attribute='quantity') }}
+                        </p>
+                        {% else %}
+                        <div class="alert alert-warning mt-3" role="alert">
+                            Nessun piatto o extra selezionato.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
