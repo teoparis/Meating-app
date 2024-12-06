@@ -40,7 +40,7 @@ def ensure_keys(menu):
         logging.debug("Menu validato per la data %s", date)
     return menu
 
-
+ 
 def load_menu():
     logging.debug("Inizio caricamento del menu...")
     try:
